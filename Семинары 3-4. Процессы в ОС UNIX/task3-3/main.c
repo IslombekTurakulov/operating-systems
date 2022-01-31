@@ -10,7 +10,7 @@ int main(int argc, char *argv[], char *envp[]) {
         exit(-1);
     } else if (process_id == 0) {
         printf("==== Process child ====\n");
-        (void) execle("/bin/cat", "/bin/cat", "main.c", 0, envp);
+        (void) execle("/bin/cat", "/bin/cat", "task3-2.c", 0, envp);
         printf("Failed to create a new process :( \n");
         exit(-1);
     } else {
