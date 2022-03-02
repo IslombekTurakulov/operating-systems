@@ -5,33 +5,40 @@
 #include <sys/shm.h>
 #include <sys/types.h>
 
+
 int main() {
+    char file_name[] = "task7-1r.c";
     int shared_memory_id;
+    int file_size = 0;
+    int *file_size_ptr;
     key_t key;
-    char *buffer;
-    char pathname[] = "07-1a.c";
-    if ((key = ftok(pathname, 0)) < 0) {
+    char *text;
+
+    if ((key = ftok(file_name, 0)) < 0) {
         printf("Error on generating key\n");
         exit(-1);
     }
-    if ((shared_memory_id = shmget(key, (2000 * sizeof(char)), 0666 | IPC_CREAT)) < 0) {
-        printf("Error on finding shared memory\n");
+
+    if ((shared_memory_id = shmget(key, sizeof(int) + file_size * sizeof(char), 0)) < 0) {
+        printf("Error on creating shared memory\n");
         exit(-1);
     }
-    if ((buffer = (char *) shmat(shared_memory_id, NULL, 0)) == (char *) (-1)) {
+    if ((file_size_ptr = (int *) shmat(shared_memory_id, NULL, 0)) == (int *) (-1)) {
         printf("Error on attaching shared memory\n");
+        exit(-1);
     }
-    int current = 0;
-    while (buffer[current] != '\0') {
-        printf("%c", buffer[current]);
-        ++current;
+    file_size = *file_size_ptr;
+    text = (char *) (file_size_ptr + 1);
+    for (int i = 0; i < file_size; i++) {
+        putchar(text[i]);
     }
-    if (shmdt(buffer) < 0) {
+    if (shmdt(file_size_ptr) < 0) {
         printf("Error on detaching shared memory\n");
         exit(-1);
     }
-    if (shmctl(shared_memory_id, 0, NULL) < 0) {
-        printf("Error on free shared memory\n");
+
+    if (shmctl(shared_memory_id, IPC_RMID, NULL) < 0) {
+        printf("Error on deleting shared memory\n");
         exit(-1);
     }
     return 0;
