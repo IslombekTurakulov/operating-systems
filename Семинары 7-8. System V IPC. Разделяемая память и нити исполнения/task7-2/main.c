@@ -1,3 +1,13 @@
+/**
+ * Мой OUTPUT:
+ * islam@islam-VirtualBox:~/CLionProjects/file$ /bin/bash /home/islam/CLionProjects/file/run.sh
+ * Thread 140144908683008 created
+ * Thread 140144900290304 created
+ * Thread 140144908687168 calculation result: 1
+ * Thread 140144900290304 calculation result: 2
+ * Thread 140144908683008 calculation result: 3
+ */
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
