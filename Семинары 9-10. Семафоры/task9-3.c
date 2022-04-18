@@ -24,7 +24,7 @@ int main() {
     int curr_id, N;
     size_t size;
     char data[16];
-    char path[] = "9-3.c";
+    char path[] = "task9-3.c";
     struct sembuf mybuf;
     key_t key;
     scanf("%d", &N);
