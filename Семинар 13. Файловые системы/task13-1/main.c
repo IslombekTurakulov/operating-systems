@@ -1,3 +1,9 @@
+/*
+ islam@islam-VirtualBox:~/CLionProjects/file$ /bin/bash /home/islam/CLionProjects/file/run.sh
+ Total depth is 40
+ [и в директории будут созданы 40 файлов]
+ */
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
