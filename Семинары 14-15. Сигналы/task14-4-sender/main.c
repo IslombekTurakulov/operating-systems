@@ -17,14 +17,14 @@ int main(void) {
     scanf("%d", &recpid);
     printf("[Sender] Enter any number: ");
     scanf("%d", &number);
-    for (int i = 0; i < 128; ++i) {
+    for (int i = 0; i < 32; ++i) {
         if ((number & (1 << i)) == 0) {
             kill(recpid, SIGUSR1);
         } else {
             kill(recpid, SIGUSR2);
         }
         received = 0;
-        while (i != 127 && received == 0);
+        while (i != 31 && received == 0);
     }
     printf("Number sent -> %d\n", number);
     return 0;

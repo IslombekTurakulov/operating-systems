@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int sendpid, shift = 0, number = 0b10000000;
+int sendpid, shift = 0, number = 0b11111111111111111111111111111111;
 
 void get_zero();
 
@@ -20,7 +20,7 @@ int main(void) {
 
 void get_one() {
     shift++;
-    if (shift == 128) {
+    if (shift == 32) {
         printf("[Interlocutor] got number -> %d\n", number);
         exit(0);
     } else {
@@ -32,7 +32,7 @@ void get_one() {
 void get_zero() {
     number = number ^ (1 << shift);
     shift++;
-    if (shift == 128) {
+    if (shift == 32) {
         printf("[Interlocutor] got number -> %d\n", number);
         exit(0);
     } else {
